@@ -8,8 +8,14 @@ html{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .big_form{
-    width: 80%;
-    margin: 100px auto;
+    width: 90%;
+    margin: 50px auto;
+}
+.big_form h2{
+    text-align: center;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 .file_inpt input{
     display: block;
@@ -68,4 +74,10 @@ table i:hover{
 .sub_btn{
     outline: none;
     border: none;
+}
+
+@media(max-width: 991px){
+    table td{
+        width: 104px;        
+    }
 }

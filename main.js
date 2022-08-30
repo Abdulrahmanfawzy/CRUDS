@@ -3,6 +3,7 @@ let desc = document.querySelector("#Description");
 let price = document.querySelector("#Price");
 let quantity = document.querySelector("#Quantity");
 let category = document.querySelector("#category");
+let search_inpt = document.querySelector("#Search");
 let sub_btn = document.querySelector(".sub_btn");
 let tbodyElement = document.querySelector(".tbodyElement");
 let empty_arr;
@@ -34,7 +35,7 @@ sub_btn.addEventListener("click" , (e)=>{
 
 function createObjectForElement(){
     let newObj = {
-        pro_name: proName.value,
+        pro_name: proName.value.toLowerCase(),
         pro_desc: desc.value,
         pro_price: price.value,
         pro_quantity: quantity.value,
@@ -60,7 +61,7 @@ function addArrayToPage(arr){
     for(let i = 0; i < arr.length; i++){
         let table = `
         <tr id=${i}>
-            <td scope="col">${i}</td>
+            <td scope="col">${i + 1}</td>
             <td scope="col">${arr[i].pro_name}</td>
             <td scope="col">${arr[i].pro_desc}</td>
             <td scope="col">${arr[i].pro_category}</td>
@@ -100,3 +101,27 @@ function editElement(i){
     tmp = i;
     scrollTo(0 , 0);
 }
+
+
+search_inpt.addEventListener("keyup" , ()=>{
+    search_inpt.value = search_inpt.value.toLowerCase();
+    tbodyElement.innerHTML = "";
+    for(let i = 0; empty_arr.length; i++){
+        if(empty_arr[i].pro_name.includes(search_inpt.value)){
+            let table = `
+            <tr id=${i}>
+                <td scope="col">${i + 1}</td>
+                <td scope="col">${empty_arr[i].pro_name}</td>
+                <td scope="col">${empty_arr[i].pro_desc}</td>
+                <td scope="col">${empty_arr[i].pro_category}</td>
+                <td scope="col">$${empty_arr[i].pro_price}</td>
+                <td scope="col">${empty_arr[i].pro_quantity}</td>
+                <td scope="col">$${empty_arr[i].pro_price * empty_arr[i].pro_quantity}</td>
+                <td scope="col"><i onclick= "editElement(${i})" class="fa-solid fa-pen-to-square"></i></td>
+                <td scope="col"><i onclick= "deleteItem(${i})" class="fa-solid fa-trash"></i></td>
+            </tr>
+            `;
+            tbodyElement.innerHTML += table;
+        }
+    }
+})
